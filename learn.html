@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning</title>
+  <style>
+ 
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .calculator {
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: aquamarine;
+    margin-top: 70px;
+  }
+
+  #display {
+    width: 100%;
+    height:10%;
+    font-size: 22px;
+    padding: 1px;
+    margin-bottom: 20px;
+    text-align: right;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #e0ffff;;
+    color: black;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons p {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .buttons button {
+    width: 60px;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #e0ffff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .buttons button:hover {
+    background-color: #b2ebf2;
+  }
+
+  .buttons button:active {
+    background-color: #80deea;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="calculator">
+  <input type="text" id="display" disabled />
+    <div class="buttons">
+    <p>
+      <button onclick="updateCalculation('1')">1</button>
+      <button onclick="updateCalculation('2')">2</button>
+      <button onclick="updateCalculation('3')">3</button>
+      <button onclick="updateCalculation('+')">+</button>
+    </p>
+    <p>
+      <button onclick="updateCalculation('4')">4</button>
+      <button onclick="updateCalculation('5')">5</button>
+      <button onclick="updateCalculation('6')">6</button>
+      <button onclick="updateCalculation('-')">-</button>
+    </p>
+    <p>
+      <button onclick="updateCalculation('7')">7</button>
+      <button onclick="updateCalculation('8')">8</button>
+      <button onclick="updateCalculation('9')">9</button>
+      <button onclick="updateCalculation('*')">*</button>
+    </p>
+    <p>
+      <button onclick="updateCalculation('0')">0</button>
+      <button onclick="updateCalculation('.')">.</button>
+      <button onclick="calculateResult()">=</button>
+      <button onclick="updateCalculation('/')">/</button>
+    </p>
+    <p>
+      <button onclick="clearCalculation()">Clear</button>
+    </p>
+  </div>
+</div>
+
+  <script>
+
+
+
+ let calculation = "";
+
+    function updateCalculation(value) {
+      calculation += value;
+      document.getElementById("display").value = calculation;
+      console.log(calculation);
+    }
+
+    function clearCalculation() {
+      calculation = "";
+      document.getElementById("display").value = "";
+      console.log("Cleared.");
+    }
+
+    function calculateResult() {
+      try {
+       let tempFunc = Function('"use strict"; return (' + calculation + ')');
+       let result = tempFunc(); 
+
+        calculation = result.toString();
+        document.getElementById("display").value = calculation;
+        console.log(calculation);
+      } catch (err) {
+        document.getElementById("display").value = "Error";
+        calculation = "";
+        console.error("Invalid expression");
+      }
+    }
+  </script> 
+</body>
+</html>
