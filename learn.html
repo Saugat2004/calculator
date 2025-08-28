@@ -17,8 +17,9 @@
     padding: 30px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: aquamarine;
+    background-color: #1f242d;
     margin-top: 70px;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   }
 
   #display {
@@ -66,6 +67,19 @@
     background-color: #80deea;
   }
 
+  .buttons button.operator {
+  background-color: orange;
+  color: white;
+}
+
+ .buttons button.operator:hover {
+  background-color: darkorange;
+}
+
+ .buttons button.operator:active {
+  background-color: #ff8c00;
+}
+
   </style>
 </head>
 <body>
@@ -76,28 +90,29 @@
       <button onclick="updateCalculation('1')">1</button>
       <button onclick="updateCalculation('2')">2</button>
       <button onclick="updateCalculation('3')">3</button>
-      <button onclick="updateCalculation('+')">+</button>
+      <button class="operator" onclick="updateCalculation('+')">+</button>
     </p>
     <p>
       <button onclick="updateCalculation('4')">4</button>
       <button onclick="updateCalculation('5')">5</button>
       <button onclick="updateCalculation('6')">6</button>
-      <button onclick="updateCalculation('-')">-</button>
+      <button class="operator" onclick="updateCalculation('-')">-</button>
     </p>
     <p>
       <button onclick="updateCalculation('7')">7</button>
       <button onclick="updateCalculation('8')">8</button>
       <button onclick="updateCalculation('9')">9</button>
-      <button onclick="updateCalculation('*')">*</button>
+      <button class="operator" onclick="updateCalculation('*')">*</button>
     </p>
     <p>
       <button onclick="updateCalculation('0')">0</button>
       <button onclick="updateCalculation('.')">.</button>
       <button onclick="calculateResult()">=</button>
-      <button onclick="updateCalculation('/')">/</button>
+      <button class="operator" onclick="updateCalculation('/')">/</button>
     </p>
     <p>
       <button onclick="clearCalculation()">Clear</button>
+      <button onclick="backspace()">⌫</button>
     </p>
   </div>
 </div>
@@ -119,6 +134,13 @@
       document.getElementById("display").value = "";
       console.log("Cleared.");
     }
+
+  function backspace() {
+  calculation = calculation.slice(0, -1);
+  document.getElementById("display").value = calculation;
+  console.log("Backspace:", calculation);
+}
+
 
     function calculateResult() {
       try {
