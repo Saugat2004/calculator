@@ -4,30 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning</title>
+
   
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
     body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    
   }
+
+  
+.calculator-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  color:#1f242d;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  width: 100%;
+  text-decoration: underline;
+}
 
   .calculator {
     padding: 30px;
     border: 2px solid black;
     border-radius: 10px;
     background-color: #1f242d;
-    margin-top: 70px;
-     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
   }
 
   #display {
     width: 100%;
     height:10%;
     font-size: 22px;
-    padding: 1px;
+    padding: 5px;
     margin-bottom: 20px;
     text-align: right;
     border: 1px solid black;
@@ -85,6 +99,7 @@
 </head>
 
 <body>
+  <h1 class="calculator-title">Calculator</h1>
   <div class="calculator">
   <input type="text" id="display" disabled />
     <div class="buttons">
@@ -161,6 +176,7 @@
 
   
     function calculateResult() {
+
     try {    
     let expression = calculation.replace(/\^/g, '**');
     let tempFunc = Function('"use strict"; return (' + expression + ')');
