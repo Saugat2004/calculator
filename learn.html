@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning</title>
+  
   <style>
- 
+
     body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -80,8 +81,9 @@
   background-color: #ff8c00;
 }
 
-  </style>
+</style>
 </head>
+
 <body>
   <div class="calculator">
   <input type="text" id="display" disabled />
@@ -111,15 +113,15 @@
       <button class="operator" onclick="updateCalculation('/')">/</button>
     </p>
     <p>
-      <button onclick="clearCalculation()">Clear</button>
+      <button onclick="updateCalculation('^')">^</button>
+      <button onclick="squareRoot()">√</button>
       <button onclick="backspace()">⌫</button>
+      <button onclick="clearCalculation()">Clear</button>
     </p>
   </div>
 </div>
 
   <script>
-
-
 
  let calculation = "";
 
@@ -156,6 +158,39 @@
         console.error("Invalid expression");
       }
     }
+
+  
+    function calculateResult() {
+    try {    
+    let expression = calculation.replace(/\^/g, '**');
+    let tempFunc = Function('"use strict"; return (' + expression + ')');
+    let result = tempFunc();
+
+    calculation = result.toString();
+    document.getElementById("display").value = calculation;
+    console.log("Result:", calculation);
+  } catch (err) {
+    document.getElementById("display").value = "Error";
+    calculation = "";
+    console.error("Invalid expression");
+  }
+}
+
+function squareRoot() {
+  try {
+    let value = Function('"use strict"; return (' + calculation + ')')();
+    if (value < 0) throw "Negative root";
+    let result = Math.sqrt(value);
+    calculation = result.toString();
+    document.getElementById("display").value = calculation;
+    console.log("Square root:", calculation);
+  } catch (err) {
+    document.getElementById("display").value = "Error";
+    calculation = "";
+    console.error("Invalid input for √");
+  }
+}
+    
   </script> 
 </body>
 </html>
